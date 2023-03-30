@@ -499,7 +499,7 @@ class FileUploadService {
             // console.log(fileContent);
         })
 
-        fileContent += `\nEND`;
+        fileContent += `\nEND\n`;
 
         // Add section
         const sectionContent = this.processSectionId();
@@ -644,7 +644,7 @@ class FileUploadService {
                 fileContent += `\n\t${this.sections.hip_bracings[value]} ${value} ` + defaultString;
             })
         }
-
+        fileContent += '\n\nEND';
         return fileContent;
 
     }
