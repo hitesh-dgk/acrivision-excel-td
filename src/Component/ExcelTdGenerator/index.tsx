@@ -21,11 +21,19 @@ const ExcelTdGenerator = () => {
             const fileName = spliValue.join(".")
             const fileUploadService = new FileUploadService();
             fileUploadService.uploadFileHandler(file)
-                .then((fileContent: any) => {
-                    console.log("promise filecontent");
-                    console.log(fileContent);
-                    var blob = new Blob([fileContent], { type: "text/plain;charset=utf-8" });
-                    saveAs(blob, fileName+"1.td");
+                .then((fileContentResponse: any) => {
+                    if(fileContentResponse.towerInputContent) {
+                        console.log("promise fileContentResponse  towerInputContent");
+                        console.log(fileContentResponse.towerInputContent);
+                        var blob = new Blob([fileContentResponse.towerInputContent], { type: "text/plain;charset=utf-8" });
+                        saveAs(blob, fileName+"_tower_input.td");
+                    }
+                    if(fileContentResponse.monopoleInputContent) {
+                        console.log("promise fileContentResponse  monopoleInputContent");
+                        console.log(fileContentResponse.monopoleInputContent);
+                        var blob = new Blob([fileContentResponse.monopoleInputContent], { type: "text/plain;charset=utf-8" });
+                        saveAs(blob, fileName+"_monopole_input.td");
+                    }
                 })
                 .catch((e: any) => {
                     console.log(`Error occured`);
